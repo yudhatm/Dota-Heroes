@@ -20,7 +20,7 @@ extension HeroDetailViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         if section == 1 {
-            return 6
+            return 7
         }
         
         return 0
@@ -58,21 +58,24 @@ extension HeroDetailViewController: UITableViewDelegate, UITableViewDataSource {
         else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
-                cell.textLabel?.text = "Health: \(Int(heroModel.baseHealth))"
+                cell.textLabel?.text = "Attack Type: \(heroModel.attackType)"
                 
             case 1:
-                cell.textLabel?.text = "Base Damage: \(heroModel.baseMinAttack) - \(heroModel.baseMaxAttack)"
+                cell.textLabel?.text = "Health: \(Int(heroModel.baseHealth))"
                 
             case 2:
-                cell.textLabel?.text = "Speed: \(heroModel.moveSpeed)"
+                cell.textLabel?.text = "Base Damage: \(heroModel.baseMinAttack) - \(heroModel.baseMaxAttack)"
                 
             case 3:
-                cell.textLabel?.text = "Str: \(Int(heroModel.baseStr))"
+                cell.textLabel?.text = "Speed: \(heroModel.moveSpeed)"
                 
             case 4:
-                cell.textLabel?.text = "Agi: \(Int(heroModel.baseAgi))"
+                cell.textLabel?.text = "Str: \(Int(heroModel.baseStr))"
                 
             case 5:
+                cell.textLabel?.text = "Agi: \(Int(heroModel.baseAgi))"
+                
+            case 6:
                 cell.textLabel?.text = "Int: \(Int(heroModel.baseInt))"
                 
             default:
