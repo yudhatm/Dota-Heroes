@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         RealmManager.instance.setDefaultRealm()
         
+        NetworkManager.shared.startNetworkMonitoring()
+        
         return true
     }
 

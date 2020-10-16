@@ -49,7 +49,10 @@ class ViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        if NetworkManager.shared.isNetworkConnected() {
+        
+        NetworkManager.shared.startNetworkMonitoring()
+        
+        if NetworkManager.shared.isInternetConnected {
             setupRx()
         }
         else {

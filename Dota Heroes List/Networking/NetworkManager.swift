@@ -15,8 +15,19 @@ import Network
 class NetworkManager {
     static var shared = NetworkManager()
     
+    private var monitor: NWPathMonitor
+    private var queue = DispatchQueue.global()
+    
+    var isInternetConnected = false
+    
     var header: HTTPHeaders = [:]
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+    
+    private init() {
+        self.monitor = NWPathMonitor()
+        self.queue = DispatchQueue.global(qos: .background)
+        self.monitor.start(queue: queue)
+    }
     
     //Set headers
     private func setHeaders() -> HTTPHeaders {
@@ -103,26 +114,21 @@ class NetworkManager {
         }
     }
     
-    func isNetworkConnected() -> Bool {
-        let monitor = NWPathMonitor()
-        var isInternetConnected = false
-        
+    func startNetworkMonitoring() {
         monitor.pathUpdateHandler = { path in
             if path.status == .satisfied {
                 print("Internet connected")
-                isInternetConnected = true
+                self.isInternetConnected = true
             }
             else {
                 print("No internet")
-                
-                isInternetConnected = false
+                self.isInternetConnected = false
             }
         }
-        
-        let queue = DispatchQueue(label: "Network")
-        monitor.start(queue: queue)
-        
-        return isInternetConnected
+    }
+    
+    func stopNetworkMonitoring() {
+        monitor.cancel()
     }
 }
 
