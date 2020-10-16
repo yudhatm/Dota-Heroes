@@ -100,6 +100,14 @@ class ViewController: UIViewController, Storyboarded {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { error in
                 print(error)
+                
+                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(okAction)
+                
+                self.navigationController?.present(alert, animated: true, completion: nil)
+                
                 self.loadHeroDataFromRealm()
             })
             .disposed(by: disposeBag)
